@@ -26,7 +26,7 @@ class AnimalController extends AbstractController
         $animal = new Animal();
         $entityManager->persist($animal);
         $entityManager->flush();
-        return $this->redirectToRoute('app_animal_index', [], Response::HTTP_SEE_OTHER);
+        return $this->json($animal);
     }
 
     #[Route('/{id}', name: 'app_animal_show', methods: ['GET'])]
@@ -39,7 +39,7 @@ class AnimalController extends AbstractController
     public function edit(EntityManagerInterface $entityManager): Response
     {
             $entityManager->flush();
-            return $this->redirectToRoute('app_animal_index', [], Response::HTTP_SEE_OTHER);
+            return $this->json($$entityManager);
     }
 
     #[Route('/{id}', name: 'app_animal_delete', methods: ['DELETE'])]
@@ -49,7 +49,6 @@ class AnimalController extends AbstractController
             $entityManager->remove($animal);
             $entityManager->flush();
         }
-
-        return $this->redirectToRoute('app_animal_index', [], Response::HTTP_SEE_OTHER);
+        return $this->json($animal);
     }
 }
